@@ -3,10 +3,13 @@
 
     <string name="gameTitle_textView">Tic Tac Toe</string>
     <string name="play_button">Play</string>
-    
+
     <string name="playerSetupTitle_tv">Enter Player Names</string>
     <string name="player1_tv">Player 1</string>
     <string name="player2_tv">Player 2</string>
     <string name="submit_button">Submit</string>
     <string name="name_hint">Enter your name</string>
+
+    <string name="playAgain_button">Play Again</string>
+    <string name="home_button">Home</string>
 </resources>
