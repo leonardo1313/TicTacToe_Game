@@ -1,10 +1,12 @@
 package com.optimahorizonapps.tictactoe_game;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -51,6 +53,23 @@ public class TicTacToeBoard extends View {
         PAINT.setAntiAlias(true);
 
         drawGameBoard(canvas);
+        drawMarkers(canvas);
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+
+        int action = event.getAction();
+        if(action == MotionEvent.ACTION_DOWN) {
+            int row = (int) Math.ceil(y / cellSize);
+            int column = (int) Math.ceil(x / cellSize);
+
+            invalidate(); //calls the onDraw method again and redraws our game board
+        }
+        return true;//just a temporary solution
     }
 
     private void drawGameBoard(Canvas canvas) {
@@ -64,5 +83,33 @@ public class TicTacToeBoard extends View {
         for(int j = 1; j < 3; j++) {
             canvas.drawLine(0, cellSize*j, canvas.getWidth(), cellSize*j, PAINT);
         }
+    }
+
+    private void drawX(Canvas canvas, int row, int column) {
+        PAINT.setColor(X_COLOR);
+        canvas.drawLine((float) ((column + 1) * cellSize - cellSize * 0.2),
+                        (float) (row * cellSize + cellSize * 0.2),
+                        (float) (column * cellSize + cellSize * 0.2),
+                        (float) ((row + 1) * cellSize - cellSize * 0.2),
+                        PAINT);
+
+        canvas.drawLine((float) (column * cellSize + cellSize * 0.2),
+                        (float) (row*cellSize + cellSize * 0.2),
+                        (float) ((column + 1) * cellSize - cellSize * 0.2),
+                        (float) ((row + 1) * cellSize - cellSize * 0.2),
+                PAINT);
+    }
+
+    private void drawO(Canvas canvas, int row, int column) {
+        PAINT.setColor(O_COLOR);
+        canvas.drawOval((float) (column * cellSize + cellSize * 0.2),
+                        (float) (row * cellSize + cellSize * 0.2),
+                        (float) (column * cellSize + cellSize - cellSize * 0.2),
+                        (float) (row * cellSize + cellSize - cellSize * 0.2),
+                        PAINT);
+    }
+
+    private void drawMarkers(Canvas canvas) {
+
     }
 }

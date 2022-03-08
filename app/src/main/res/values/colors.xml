@@ -7,6 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background_mainActivity">#CD43A047</color>
+    <color name="background_mainActivity">#006064</color>
     <color name="button_customColor">#1024A1</color>
 </resources>
