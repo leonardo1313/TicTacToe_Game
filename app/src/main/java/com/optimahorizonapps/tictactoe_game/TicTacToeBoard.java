@@ -19,10 +19,13 @@ public class TicTacToeBoard extends View {
     private final int WINNING_LINE_COLOR;
 
     private final Paint PAINT = new Paint();
+    private final GameLogic GAME;
+
     private int cellSize = getWidth() / 3;
 
     public TicTacToeBoard(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        GAME = new GameLogic();
 
         TypedArray typedArray = context.getTheme().
                 obtainStyledAttributes(attrs, R.styleable.TicTacToeBoard,
@@ -67,9 +70,22 @@ public class TicTacToeBoard extends View {
             int row = (int) Math.ceil(y / cellSize);
             int column = (int) Math.ceil(x / cellSize);
 
+            if(GAME.updateGameBoard(row, column)) {
+                invalidate();
+
+                //this is updating the players turn
+                if (GAME.getPlayer() % 2 == 0) {
+                    GAME.setPlayer(GAME.getPlayer() - 1);
+                } else {
+                    GAME.setPlayer((GAME.getPlayer() + 1));
+                }
+            }
+
             invalidate(); //calls the onDraw method again and redraws our game board
+
+            return true;
         }
-        return true;//just a temporary solution
+        return false;
     }
 
     private void drawGameBoard(Canvas canvas) {
@@ -110,6 +126,16 @@ public class TicTacToeBoard extends View {
     }
 
     private void drawMarkers(Canvas canvas) {
-
+        for(int r = 0; r < 3; r++) {
+            for(int c = 0; c < 3; c++) {
+                if(GAME.getGameBoard()[r][c] != 0) {
+                    if(GAME.getGameBoard()[r][c] == 1) {
+                        drawX(canvas, r, c);
+                    } else {
+                        drawO(canvas, r, c);
+                    }
+                }
+            }
+        }
     }
 }
