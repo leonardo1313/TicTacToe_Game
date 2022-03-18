@@ -138,4 +138,8 @@ public class TicTacToeBoard extends View {
             }
         }
     }
+
+    public void resetGame() {
+        GAME.resetGame();
+    }
 }

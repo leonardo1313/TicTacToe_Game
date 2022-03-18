@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/playAgain_button"
             android:layout_width="135dp"
             android:layout_height="60dp"
             android:layout_marginEnd="20dp"
@@ -38,14 +38,14 @@
             android:onClick="playAgainButtonClick"
             android:text="@string/playAgain_button"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button2"
+            app:layout_constraintEnd_toStartOf="@+id/home_button"
             app:layout_constraintHorizontal_bias="0.192"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/home_button"
             android:layout_width="130dp"
             android:layout_height="60dp"
             android:background="@drawable/custom_button2"
