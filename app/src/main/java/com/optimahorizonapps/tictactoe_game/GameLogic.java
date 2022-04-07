@@ -1,9 +1,18 @@
 package com.optimahorizonapps.tictactoe_game;
 
+import android.widget.Button;
+import android.widget.TextView;
+
 public class GameLogic {
 
     private int[][] gameBoard;
+    private String[] playerNames = {"Player 1", "Player 2"};
+    private Button playAgainBtn;
+    private Button homeBtn;
+    private TextView playerTurnTV;
+
     private int player = 1;
+
 
     GameLogic() {
         gameBoard = new int[3][3];
@@ -18,11 +27,33 @@ public class GameLogic {
         if(gameBoard[row - 1][column - 1] == 0) {
             gameBoard[row - 1][column - 1] = player;
 
+            if(player == 1) {
+                playerTurnTV.setText((String.format("%s's Turn", playerNames[1])));
+            } else {
+                playerTurnTV.setText((String.format("%s's Turn", playerNames[0])));
+            }
+
             return true;
         } else {
             return false;
         }
 
+    }
+
+    public void setPlayAgainBtn(Button playAgainBtn) {
+        this.playAgainBtn = playAgainBtn;
+    }
+
+    public void setHomeBtn(Button homeBtn) {
+        this.homeBtn = homeBtn;
+    }
+
+    public void setPlayerTurnTV(TextView playerTurnTV) {
+        this.playerTurnTV = playerTurnTV;
+    }
+
+    public void setPlayerNames(String[] playerNames) {
+        this.playerNames = playerNames;
     }
 
     public int[][] getGameBoard() {
