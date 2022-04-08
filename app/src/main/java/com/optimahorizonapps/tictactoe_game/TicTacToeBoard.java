@@ -20,6 +20,8 @@ public class TicTacToeBoard extends View {
     private final int O_COLOR;
     private final int WINNING_LINE_COLOR;
 
+    private boolean winningLine = false;
+
     private final Paint PAINT = new Paint();
     private final GameLogic GAME;
 
@@ -72,16 +74,24 @@ public class TicTacToeBoard extends View {
             int row = (int) Math.ceil(y / cellSize);
             int column = (int) Math.ceil(x / cellSize);
 
-            if(GAME.updateGameBoard(row, column)) {
-                invalidate();
+            if(!winningLine) {
+                if(GAME.updateGameBoard(row, column)) {
+                    invalidate();
 
-                //this is updating the players turn
-                if (GAME.getPlayer() % 2 == 0) {
-                    GAME.setPlayer(GAME.getPlayer() - 1);
-                } else {
-                    GAME.setPlayer((GAME.getPlayer() + 1));
+                    if(GAME.winnerCheck()) {
+                        winningLine = true;
+                        invalidate();
+                    }
+
+                    //this is updating the players turn
+                    if (GAME.getPlayer() % 2 == 0) {
+                        GAME.setPlayer(GAME.getPlayer() - 1);
+                    } else {
+                        GAME.setPlayer((GAME.getPlayer() + 1));
+                    }
                 }
             }
+
 
             invalidate(); //calls the onDraw method again and redraws our game board
 
@@ -150,5 +160,6 @@ public class TicTacToeBoard extends View {
 
     public void resetGame() {
         GAME.resetGame();
+        winningLine = false;
     }
 }
